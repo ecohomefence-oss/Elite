@@ -1,13 +1,132 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>elite-home-mockup</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elite Properties Spain | Refined Concept</title>
+  <style>
+    :root{
+      --bg:#f7f5f0;
+      --navy:#17202c;
+      --navy-2:#243243;
+      --gold:#b89963;
+      --gold-soft:#d8c19a;
+      --sand:#ede6db;
+      --text:#1e242b;
+      --muted:#68707a;
+      --white:#ffffff;
+      --line:rgba(23,32,44,.12);
+      --shadow:0 24px 60px rgba(0,0,0,.12);
+      --radius:26px;
+      --max:1200px;
+    }
+    *{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+    a{text-decoration:none;color:inherit} .container{width:min(var(--max),calc(100% - 32px));margin:auto}
+    .hero{min-height:100vh;color:white;background:linear-gradient(180deg,rgba(10,16,26,.35),rgba(10,16,26,.7)),url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat;position:relative;display:flex;align-items:end}
+    .top{position:absolute;inset:0 0 auto 0;padding:22px 0}.top-inner{display:flex;justify-content:space-between;align-items:center;gap:20px}.logo{font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-size:13px;background:rgba(255,255,255,.08);padding:12px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.12)}
+    .nav{display:flex;gap:24px;align-items:center;font-size:14px}.nav .cta{background:var(--gold);padding:10px 16px;border-radius:999px;color:white;font-weight:700}
+    .hero-content{padding:140px 0 50px;width:100%}.eyebrow{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);font-size:12px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px}
+    h1{font-size:clamp(40px,6vw,82px);line-height:.95;margin:0 0 18px;max-width:900px;letter-spacing:-.04em}.sub{max-width:760px;font-size:20px;color:rgba(255,255,255,.9);margin-bottom:28px}
+    .actions{display:flex;gap:14px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;justify-content:center;padding:15px 22px;border-radius:999px;font-weight:700}.btn-primary{background:var(--gold);color:white}.btn-secondary{background:rgba(255,255,255,.08);color:white;border:1px solid rgba(255,255,255,.14)}
+    .search-bar{margin-top:34px;background:var(--white);border-radius:24px;padding:16px;display:grid;grid-template-columns:repeat(5,1fr) auto;gap:12px;box-shadow:var(--shadow);color:var(--text)}
+    .field{background:#f7f4ee;border:1px solid #ebe2d6;border-radius:16px;padding:12px 14px}.field small{display:block;color:var(--muted);margin-bottom:4px}.search{border:none;border-radius:16px;padding:0 22px;background:var(--navy);color:white;font-weight:700}
+    section{padding:88px 0}.section-head{max-width:760px;margin-bottom:28px} h2{font-size:clamp(30px,4vw,54px);line-height:1.02;margin:0 0 14px;letter-spacing:-.03em}.lead{font-size:18px;color:var(--muted);margin:0}
+    .intro{margin-top:-26px;position:relative;z-index:5;background:var(--white);border-top-left-radius:32px;border-top-right-radius:32px}.grid-2{display:grid;grid-template-columns:1.05fr .95fr;gap:28px}.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.stat{background:#faf8f4;border:1px solid #eee6dc;border-radius:24px;padding:24px}.stat strong{display:block;font-size:34px;margin-bottom:8px}.stat span{color:var(--muted)}
+    .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}.card{border-radius:26px;overflow:hidden;box-shadow:var(--shadow);background:#ddd;position:relative;min-height:360px}.card::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.65))}.card-body{position:absolute;left:22px;right:22px;bottom:22px;z-index:2;color:white}.card h3{margin:0 0 8px;font-size:28px}.card p{margin:0;color:rgba(255,255,255,.88)}
+    .split-banner{display:grid;grid-template-columns:1fr 1fr;gap:22px}.banner-box{border-radius:30px;padding:34px;min-height:320px;display:flex;flex-direction:column;justify-content:end;box-shadow:var(--shadow)}.banner-dark{background:linear-gradient(180deg,rgba(20,29,40,.1),rgba(20,29,40,.95)),url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;color:white}.banner-light{background:linear-gradient(180deg,rgba(184,153,99,.08),rgba(184,153,99,.2)),var(--sand);color:var(--navy)}
+    .banner-box h3{font-size:34px;margin:0 0 10px}.banner-box p{max-width:460px}
+    .footer{background:var(--navy);color:#d4d8dd;padding:60px 0 30px}.footer-grid{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:26px}.footer h4{color:white;margin:0 0 12px}.foot{border-top:1px solid rgba(255,255,255,.08);margin-top:20px;padding-top:16px;font-size:13px;color:#9da8b5}
+    @media(max-width:1050px){.search-bar,.grid-2,.cards,.split-banner,.footer-grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:720px){.nav a:not(.cta){display:none}.stats{grid-template-columns:1fr}section{padding:64px 0}.hero-content{padding-top:110px}}
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="top">
+      <div class="container top-inner">
+        <div class="logo">Elite Properties Spain</div>
+        <nav class="nav">
+          <a href="#collection">Collection</a>
+          <a href="#investment">Investment</a>
+          <a href="#contact">Contact</a>
+          <a class="cta" href="#contact">Book Consultation</a>
+        </nav>
+      </div>
+    </div>
+    <div class="container hero-content">
+      <span class="eyebrow">Luxury real estate · Costa del Sol</span>
+      <h1>A more premium, editorial direction for Elite Properties Spain.</h1>
+      <p class="sub">New palette, sharper layout and more polished calls to action to position Elite Properties Spain closer to luxury, investment and international confidence.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#collection">View Properties</a>
+        <a class="btn btn-secondary" href="#investment">Explore Investment</a>
+      </div>
+      <div class="search-bar">
+        <div class="field"><small>Location</small>Marbella / Estepona</div>
+        <div class="field"><small>Type</small>Villa / Penthouse / Apartment</div>
+        <div class="field"><small>Bedrooms</small>Any</div>
+        <div class="field"><small>Budget</small>€500k+</div>
+        <div class="field"><small>Reference</small>Search code</div>
+        <button class="search">Search</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="intro">
+    <div class="container grid-2">
+      <div>
+        <div class="section-head">
+          <h2>This version pushes Elite into a more luxury-driven visual system.</h2>
+          <p class="lead">Compared with the previous concept, this one is more editorial, more premium and more suitable for buyer trust at €500k and above.</p>
+        </div>
+        <p>The idea is to move away from a more generic real-estate presentation and bring the brand closer to premium agency positioning, with a darker navy foundation, warmer gold accent and cleaner visual hierarchy.</p>
+      </div>
+      <div class="stats">
+        <div class="stat"><strong>Navy + Gold</strong><span>more premium than the previous beige-heavy version</span></div>
+        <div class="stat"><strong>Sharper CTA</strong><span>clearer path to consultation and property search</span></div>
+        <div class="stat"><strong>Luxury feel</strong><span>better fit for higher-ticket international buyers</span></div>
+        <div class="stat"><strong>Editorial layout</strong><span>more curated and less template-like visually</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="collection">
+    <div class="container">
+      <div class="section-head">
+        <h2>Collection highlights</h2>
+        <p class="lead">The cards, colors and typography are all updated to feel more premium and more curated.</p>
+      </div>
+      <div class="cards">
+        <article class="card" style="background:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat"><div class="card-body"><h3>Exclusive Villas</h3><p>Luxury homes in the most desirable Costa del Sol areas.</p></div></article>
+        <article class="card" style="background:url('https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat"><div class="card-body"><h3>New Developments</h3><p>Modern opportunities with a cleaner sales narrative.</p></div></article>
+        <article class="card" style="background:url('https://images.unsplash.com/photo-1501183638710-841dd1904471?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat"><div class="card-body"><h3>Investment Assets</h3><p>Stronger positioning for investors and second-home buyers.</p></div></article>
+        <article class="card" style="background:url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat"><div class="card-body"><h3>Inspection Trips</h3><p>Turn interest into qualified buyer meetings on the ground.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="investment">
+    <div class="container split-banner">
+      <div class="banner-box banner-dark">
+        <h3>Investor positioning</h3>
+        <p>This direction gives more room to investor trust, higher-ticket language and stronger premium perception.</p>
+      </div>
+      <div class="banner-box banner-light">
+        <h3>Design direction</h3>
+        <p>New palette, better button hierarchy, darker contrast and more polished structure. This is the direction I would take for Elite next.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div><div class="logo" style="display:inline-block;background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.08)">Elite Properties Spain</div></div>
+        <div><h4>Primary actions</h4><p>View properties</p><p>Book consultation</p><p>Explore investment</p></div>
+        <div><h4>Status</h4><p>Second visual direction for review</p></div>
+      </div>
+      <div class="foot">Elite Properties Spain · visual direction v2</div>
+    </div>
+  </footer>
+</body>
 </html>
