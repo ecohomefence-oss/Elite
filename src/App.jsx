@@ -2,170 +2,200 @@ import './App.css'
 
 const featuredProperties = [
   {
-    title: 'Frontline golf villa in Nueva Andalucía',
-    price: '€4.950.000',
-    meta: '6 beds · 7 baths · 742 m² built',
-    tag: 'Marbella',
+    title: 'Contemporary Villa with Panoramic Sea Views',
+    price: '€4,950,000',
+    location: 'Marbella',
+    beds: 6,
+    baths: 5,
+    size: '680 m²',
+    image:
+      'https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1400&q=80',
+    badge: 'New',
   },
   {
-    title: 'Contemporary sea-view residence in La Zagaleta',
-    price: '€11.900.000',
-    meta: '8 beds · 9 baths · 1.380 m² built',
-    tag: 'Benahavís',
+    title: 'Exclusive Penthouse with Rooftop Terrace',
+    price: '€2,850,000',
+    location: 'Marbella',
+    beds: 4,
+    baths: 3,
+    size: '320 m²',
+    image:
+      'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1400&q=80',
   },
   {
-    title: 'Designer penthouse on Marbella Golden Mile',
-    price: '€3.250.000',
-    meta: '4 beds · 4 baths · 312 m² interior + terraces',
-    tag: 'Golden Mile',
+    title: 'Mediterranean Villa with Private Gardens',
+    price: '€3,200,000',
+    location: 'Estepona',
+    beds: 5,
+    baths: 4,
+    size: '520 m²',
+    image:
+      'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1400&q=80',
   },
 ]
 
-const lifestyleCards = [
+const reasons = [
   {
-    title: 'Luxury property advisory',
-    text: 'Curated homes, off-market access and investment-focused guidance across Marbella, Benahavís, Estepona and Sotogrande.',
+    title: '25+ Years of Trust',
+    text: 'Over two decades of proven expertise in Costa del Sol’s luxury market.',
   },
   {
-    title: 'Local knowledge that closes deals',
-    text: 'Golf, beachfront, gated communities, new developments and lifestyle assets matched to how international buyers actually search.',
+    title: 'International Reach',
+    text: 'Serving discerning clients from over 40 countries worldwide.',
   },
   {
-    title: 'Seller positioning with premium presentation',
-    text: 'High-ticket listings framed with sharper design, stronger storytelling and qualification-first lead capture.',
+    title: 'Exclusive Access',
+    text: 'Off-market properties and pre-launch opportunities for our clients.',
+  },
+  {
+    title: 'White-Glove Service',
+    text: 'Personalized concierge service from first viewing to handover.',
   },
 ]
-
-const stats = [
-  { value: '25+', label: 'Years in property & investment' },
-  { value: 'Costa del Sol', label: 'Core market expertise' },
-  { value: 'Luxury', label: 'Homes from €500k to ultra-prime' },
-]
-
-const zones = ['Marbella', 'Benahavís', 'Estepona', 'Sotogrande', 'Mijas', 'Golden Mile']
 
 function App() {
   return (
-    <div className="page-shell">
-      <header className="topbar">
-        <div className="brand-block">
-          <span className="brand-kicker">Elite Properties Spain</span>
-          <span className="brand-subtitle">Costa del Sol luxury real estate</span>
-        </div>
-        <nav className="topnav" aria-label="Main navigation">
-          <a href="#collection">Collection</a>
-          <a href="#advisory">Advisory</a>
-          <a href="#areas">Areas</a>
-          <a href="#contact">Contact</a>
+    <div className="site-shell">
+      <header className="hero">
+        <div className="hero-overlay" />
+        <nav className="hero-nav">
+          <div className="brand">
+            <span className="brand-main">Elite Properties</span>
+            <span className="brand-sub">Spain</span>
+          </div>
+          <button className="menu-button" aria-label="Open menu">
+            <span />
+            <span />
+            <span />
+          </button>
         </nav>
+
+        <div className="hero-content">
+          <p className="eyebrow">Costa del Sol · Since 1999</p>
+          <h1>
+            Exceptional Properties
+            <span>for Exceptional Living</span>
+          </h1>
+          <p className="hero-copy">
+            Discover the finest luxury villas, penthouses, and exclusive residences
+            across Marbella, Mijas, and Estepona.
+          </p>
+
+          <div className="hero-actions">
+            <a href="#properties" className="btn btn-gold">View Collection</a>
+            <a href="#contact" className="btn btn-outline">Private Consultation</a>
+          </div>
+        </div>
+
+        <div className="scroll-indicator">↓</div>
       </header>
 
       <main>
-        <section className="hero-section">
-          <div className="hero-copy">
-            <p className="eyebrow">Luxury real estate on the Costa del Sol</p>
-            <h1>Redesign concept for a sharper, higher-value Elite presence.</h1>
-            <p className="hero-text">
-              A premium homepage direction focused on international buyers, qualified leads,
-              luxury credibility and a cleaner visual language ready to evolve into the full site.
-            </p>
-
-            <div className="hero-actions">
-              <a className="primary-btn" href="#collection">View signature properties</a>
-              <a className="secondary-btn" href="#contact">Book a private consultation</a>
+        <section className="section properties-section" id="properties">
+          <div className="section-head split">
+            <div>
+              <p className="eyebrow">Curated Selection</p>
+              <h2>Featured Properties</h2>
             </div>
-
-            <div className="stats-grid">
-              {stats.map((stat) => (
-                <div key={stat.label} className="stat-card">
-                  <strong>{stat.value}</strong>
-                  <span>{stat.label}</span>
-                </div>
-              ))}
-            </div>
+            <a href="#contact" className="view-all">View All →</a>
           </div>
 
-          <div className="hero-visual" aria-hidden="true">
-            <div className="hero-panel hero-panel-main">
-              <span className="panel-label">Featured market</span>
-              <h2>Marbella · Benahavís · Estepona</h2>
-              <p>
-                Premium waterfront, golf-front and gated-community homes for buyers seeking
-                lifestyle, yield and long-term positioning.
-              </p>
-            </div>
-            <div className="hero-panel hero-panel-float">
-              <span className="mini-label">Private advisory</span>
-              <strong>Buyer sourcing, seller strategy and investment guidance</strong>
-            </div>
-          </div>
-        </section>
-
-        <section className="featured-section" id="collection">
-          <div className="section-heading">
-            <p className="eyebrow">Signature collection</p>
-            <h2>Designed to sell lifestyle, not just square metres.</h2>
-          </div>
-
-          <div className="property-grid">
+          <div className="properties-grid">
             {featuredProperties.map((property) => (
-              <article key={property.title} className="property-card">
-                <span className="property-tag">{property.tag}</span>
+              <article className="property-card" key={property.title}>
+                <div
+                  className="property-image"
+                  style={{ backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.05), rgba(0,0,0,0.35)), url(${property.image})` }}
+                >
+                  <div className="property-image-info">
+                    <div>
+                      <strong>{property.price}</strong>
+                      <span>{property.location}</span>
+                    </div>
+                    {property.badge ? <em>{property.badge}</em> : null}
+                  </div>
+                </div>
                 <h3>{property.title}</h3>
-                <p className="property-meta">{property.meta}</p>
-                <div className="property-footer">
-                  <strong>{property.price}</strong>
-                  <span>Request details →</span>
+                <div className="property-meta-row">
+                  <span>🛏 {property.beds}</span>
+                  <span>🛁 {property.baths}</span>
+                  <span>◻ {property.size}</span>
                 </div>
               </article>
             ))}
           </div>
         </section>
 
-        <section className="advisory-section" id="advisory">
-          <div className="section-heading narrow">
-            <p className="eyebrow">Positioning</p>
-            <h2>A cleaner luxury direction built for trust, discovery and lead capture.</h2>
+        <section className="trust-section">
+          <div className="section-head center light">
+            <p className="eyebrow">Why Choose Us</p>
+            <h2>A Legacy of Excellence</h2>
           </div>
 
-          <div className="lifestyle-grid">
-            {lifestyleCards.map((card) => (
-              <article key={card.title} className="lifestyle-card">
-                <h3>{card.title}</h3>
-                <p>{card.text}</p>
+          <div className="reasons-grid">
+            {reasons.map((reason) => (
+              <article className="reason-card" key={reason.title}>
+                <div className="reason-icon">◇</div>
+                <h3>{reason.title}</h3>
+                <p>{reason.text}</p>
               </article>
             ))}
           </div>
         </section>
 
-        <section className="areas-section" id="areas">
-          <div className="areas-copy">
-            <p className="eyebrow">Key areas</p>
-            <h2>Built around the places buyers already ask for first.</h2>
+        <section className="section contact-section" id="contact">
+          <div className="section-head center narrow">
+            <p className="eyebrow">Exclusive Service</p>
+            <h2>Begin Your Journey</h2>
             <p>
-              The new structure can scale into area landing pages, curated collection pages,
-              blog-driven SEO and filtered lead funnels for different buyer intents.
+              Whether you&apos;re searching for your dream home or an investment
+              opportunity, our team is here to guide you every step of the way.
             </p>
           </div>
-          <div className="areas-list">
-            {zones.map((zone) => (
-              <span key={zone}>{zone}</span>
-            ))}
-          </div>
-        </section>
 
-        <section className="contact-section" id="contact">
-          <div>
-            <p className="eyebrow">Next phase</p>
-            <h2>Ready to turn this into the full Elite redesign.</h2>
-            <p>
-              Next build steps: inner pages, property archive style, area templates, seller page,
-              blog structure and lead-generation flows.
-            </p>
+          <div className="contact-card">
+            <div className="contact-form-block">
+              <h3>Get in Touch</h3>
+              <form className="contact-form">
+                <input type="text" placeholder="Full Name" />
+                <div className="contact-row">
+                  <input type="email" placeholder="Email" />
+                  <input type="tel" placeholder="Phone" />
+                </div>
+                <textarea placeholder="Message (optional)" rows="5" />
+                <div className="contact-actions">
+                  <a className="btn btn-dark" href="mailto:info@elitepropertiesspain.com">Send Request</a>
+                  <a className="btn btn-gold" href="https://wa.me/34600000000">WhatsApp</a>
+                </div>
+              </form>
+            </div>
           </div>
-          <a className="primary-btn" href="mailto:jose@elitepropertiesspain.com">Continue with full site build</a>
         </section>
       </main>
+
+      <footer className="site-footer">
+        <div>
+          <div className="brand footer-brand">
+            <span className="brand-main">Elite Properties</span>
+            <span className="brand-sub">Spain</span>
+          </div>
+          <p>
+            Over 25 years of expertise in luxury real estate across the Costa del Sol.
+            Your trusted partner for exceptional properties.
+          </p>
+        </div>
+        <div>
+          <p className="footer-title">Quick Links</p>
+          <a href="#properties">Properties</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div>
+          <p className="footer-title">Contact</p>
+          <span>Marbella, Costa del Sol, Spain</span>
+          <span>+34 600 000 000</span>
+          <span>info@elitepropertiesspain.com</span>
+        </div>
+      </footer>
     </div>
   )
 }
