@@ -3,22 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Elite Properties Spain | Luxury Real Estate</title>
+  <title>Elite Properties Spain | Rebranding Direction</title>
   <style>
     :root {
-      --bg: #f7f5f0;
-      --navy: #17202c;
-      --navy-2: #243243;
-      --gold: #b89963;
-      --gold-soft: #d8c19a;
-      --sand: #ede6db;
-      --text: #1e242b;
-      --muted: #68707a;
+      --bg: #f6f2ec;
+      --paper: #fbf8f3;
+      --navy: #1a2733;
+      --navy-soft: #2a3948;
+      --gold: #b6905c;
+      --gold-soft: #d8c19f;
+      --sand: #ece3d6;
+      --text: #1d2430;
+      --muted: #67707c;
       --white: #ffffff;
-      --line: rgba(23, 32, 44, 0.12);
-      --shadow: 0 24px 60px rgba(0, 0, 0, 0.12);
-      --radius: 26px;
-      --max: 1200px;
+      --line: rgba(26,39,51,.10);
+      --shadow: 0 28px 70px rgba(16, 24, 33, 0.12);
+      --radius: 28px;
+      --max: 1220px;
       --serif: 'Cormorant Garamond', 'Times New Roman', serif;
       --sans: Inter, Arial, Helvetica, sans-serif;
     }
@@ -38,19 +39,27 @@
 
     .hero {
       min-height: 100vh;
-      color: white;
+      color: #fff;
       background:
-        linear-gradient(180deg, rgba(10,16,26,.35), rgba(10,16,26,.7)),
+        linear-gradient(180deg, rgba(15,20,28,.20), rgba(15,20,28,.68)),
         url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat;
       position: relative;
       display: flex;
       align-items: end;
     }
 
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(24,39,53,.12) 35%, rgba(24,39,53,.38));
+    }
+
     .top {
       position: absolute;
       inset: 0 0 auto 0;
-      padding: 22px 0;
+      padding: 28px 0;
+      z-index: 2;
     }
 
     .top-inner {
@@ -62,58 +71,59 @@
 
     .logo {
       font-family: var(--serif);
-      font-size: 2.2rem;
-      letter-spacing: .08em;
+      font-size: clamp(1.9rem, 2vw, 2.8rem);
+      letter-spacing: .06em;
       text-transform: uppercase;
+      font-weight: 400;
     }
 
-    .nav {
-      display: flex;
-      gap: 24px;
-      align-items: center;
-      font-size: 14px;
-    }
-
-    .nav .cta {
-      background: var(--gold);
-      padding: 10px 16px;
+    .menu {
+      width: 54px;
+      height: 54px;
       border-radius: 999px;
-      color: white;
-      font-weight: 700;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.06);
+      font-size: 1.2rem;
+      backdrop-filter: blur(8px);
     }
 
     .hero-content {
-      padding: 140px 0 50px;
+      position: relative;
+      z-index: 2;
       width: 100%;
+      padding: 150px 0 52px;
     }
 
     .eyebrow {
-      display: inline-block;
-      padding: 8px 12px;
+      display: inline-flex;
+      align-items: center;
+      padding: 9px 14px;
       border-radius: 999px;
-      background: rgba(255,255,255,.1);
-      border: 1px solid rgba(255,255,255,.15);
-      font-size: 12px;
-      letter-spacing: .16em;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.14);
+      font-size: 11px;
+      letter-spacing: .18em;
       text-transform: uppercase;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
 
     h1 {
-      font-family: var(--serif);
-      font-size: clamp(40px, 6vw, 82px);
-      line-height: .95;
       margin: 0 0 18px;
-      max-width: 900px;
+      max-width: 940px;
+      font-family: var(--serif);
+      font-size: clamp(4rem, 7vw, 7rem);
+      line-height: .92;
       letter-spacing: -.04em;
       font-weight: 400;
     }
 
     .sub {
       max-width: 760px;
-      font-size: 20px;
+      font-size: clamp(1.1rem, 1.8vw, 1.45rem);
       color: rgba(255,255,255,.9);
-      margin-bottom: 28px;
+      margin: 0 0 28px;
     }
 
     .actions {
@@ -126,18 +136,21 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 15px 22px;
+      min-height: 58px;
+      padding: 0 24px;
       border-radius: 999px;
       font-weight: 700;
-      min-height: 58px;
+      transition: transform .2s ease;
     }
 
-    .btn-primary { background: var(--gold); color: white; }
-    .btn-secondary { background: rgba(255,255,255,.08); color: white; border: 1px solid rgba(255,255,255,.14); }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { background: var(--gold); color: #fff; }
+    .btn-secondary { border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.08); color: #fff; }
+    .btn-dark { background: var(--navy); color: #fff; }
 
     .search-bar {
       margin-top: 34px;
-      background: var(--white);
+      background: rgba(255,255,255,.97);
       border-radius: 24px;
       padding: 16px;
       display: grid;
@@ -158,137 +171,134 @@
       display: block;
       color: var(--muted);
       margin-bottom: 4px;
+      font-size: .7rem;
       text-transform: uppercase;
       letter-spacing: .12em;
-      font-size: .7rem;
     }
 
     .search {
-      border: none;
+      border: 0;
       border-radius: 16px;
-      padding: 0 22px;
+      padding: 0 24px;
       background: var(--navy);
-      color: white;
+      color: #fff;
       font-weight: 700;
     }
 
-    section { padding: 88px 0; }
-
-    .section-head {
-      max-width: 760px;
-      margin-bottom: 28px;
-    }
-
-    h2 {
-      font-family: var(--serif);
-      font-size: clamp(30px, 4vw, 54px);
-      line-height: 1.02;
-      margin: 0 0 14px;
-      letter-spacing: -.03em;
-      font-weight: 400;
-    }
-
-    .lead {
-      font-size: 18px;
-      color: var(--muted);
-      margin: 0;
-    }
+    section { padding: 96px 0; }
 
     .intro {
-      margin-top: -26px;
+      margin-top: -30px;
       position: relative;
-      z-index: 5;
-      background: var(--white);
-      border-top-left-radius: 32px;
-      border-top-right-radius: 32px;
+      z-index: 4;
+      background: var(--paper);
+      border-top-left-radius: 34px;
+      border-top-right-radius: 34px;
     }
 
     .grid-2 {
       display: grid;
       grid-template-columns: 1.05fr .95fr;
-      gap: 28px;
+      gap: 34px;
     }
 
-    .intro-copy {
-      padding-top: 8px;
+    .section-head { max-width: 780px; margin-bottom: 26px; }
+
+    h2 {
+      margin: 0 0 14px;
+      font-family: var(--serif);
+      font-size: clamp(2.6rem, 4vw, 4.6rem);
+      line-height: .98;
+      letter-spacing: -.03em;
+      font-weight: 400;
+    }
+
+    .lead {
+      margin: 0;
+      font-size: 1.1rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .body-copy {
+      color: var(--muted);
+      max-width: 640px;
+      font-size: 1rem;
+      line-height: 1.9;
     }
 
     .stats {
       display: grid;
       grid-template-columns: repeat(2,1fr);
-      gap: 16px;
+      gap: 18px;
+      align-content: start;
     }
 
     .stat {
-      background: #faf8f4;
-      border: 1px solid #eee6dc;
+      background: #fff;
+      border: 1px solid #ece3d5;
       border-radius: 24px;
       padding: 24px;
+      box-shadow: 0 10px 24px rgba(17, 24, 32, 0.04);
     }
 
     .stat strong {
       display: block;
-      font-size: 30px;
       margin-bottom: 8px;
       font-family: var(--serif);
+      font-size: 2rem;
       font-weight: 500;
+      color: var(--navy);
     }
 
     .stat span { color: var(--muted); }
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-    }
+    .cards { display: grid; grid-template-columns: repeat(4,1fr); gap: 22px; }
 
     .card {
-      border-radius: 26px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      background: #ddd;
+      min-height: 400px;
       position: relative;
-      min-height: 380px;
+      overflow: hidden;
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      background: #d6d6d6;
     }
 
     .card::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.68));
+      background: linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.68));
     }
 
     .card-body {
       position: absolute;
-      left: 22px;
-      right: 22px;
-      bottom: 22px;
+      left: 24px;
+      right: 24px;
+      bottom: 24px;
       z-index: 2;
-      color: white;
+      color: #fff;
     }
 
     .card h3 {
-      margin: 0 0 8px;
-      font-size: 30px;
+      margin: 0 0 10px;
       font-family: var(--serif);
+      font-size: 2rem;
       font-weight: 400;
     }
 
     .card p {
       margin: 0;
       color: rgba(255,255,255,.88);
+      line-height: 1.7;
     }
 
-    .split-banner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 22px;
-    }
+    .split-banner { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 
     .banner-box {
-      border-radius: 30px;
-      padding: 34px;
-      min-height: 320px;
+      border-radius: 32px;
+      padding: 38px;
+      min-height: 340px;
       display: flex;
       flex-direction: column;
       justify-content: end;
@@ -297,33 +307,33 @@
 
     .banner-dark {
       background:
-        linear-gradient(180deg, rgba(20,29,40,.1), rgba(20,29,40,.95)),
+        linear-gradient(180deg, rgba(20,29,40,.10), rgba(20,29,40,.95)),
         url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
-      color: white;
+      color: #fff;
     }
 
     .banner-light {
-      background: linear-gradient(180deg, rgba(184,153,99,.08), rgba(184,153,99,.2)), var(--sand);
+      background: linear-gradient(180deg, rgba(182,144,92,.10), rgba(182,144,92,.22)), var(--sand);
       color: var(--navy);
     }
 
     .banner-box h3 {
+      margin: 0 0 12px;
       font-family: var(--serif);
-      font-size: 34px;
-      margin: 0 0 10px;
+      font-size: 2.3rem;
       font-weight: 400;
     }
 
-    .banner-box p { max-width: 460px; margin: 0; }
+    .banner-box p { margin: 0; max-width: 470px; line-height: 1.8; }
 
     .contact-panel {
-      background: var(--white);
-      border: 1px solid #eadfce;
-      box-shadow: var(--shadow);
-      padding: 34px;
-      border-radius: 30px;
-      max-width: 880px;
+      max-width: 920px;
       margin: 0 auto;
+      background: #fff;
+      border-radius: 32px;
+      border: 1px solid #ebe1d4;
+      padding: 38px;
+      box-shadow: var(--shadow);
     }
 
     .form-grid {
@@ -333,60 +343,79 @@
       margin-top: 26px;
     }
 
-    .form-grid textarea,
-    .form-grid input {
+    .form-grid input,
+    .form-grid textarea {
       width: 100%;
-      border: 1px solid #e3dacd;
+      border: 1px solid #e4dbcf;
       background: #faf8f3;
-      border-radius: 14px;
+      border-radius: 16px;
       padding: 16px 18px;
       font: inherit;
       color: var(--text);
     }
 
-    .form-grid textarea { grid-column: 1 / -1; min-height: 140px; resize: vertical; }
+    .form-grid textarea {
+      grid-column: 1 / -1;
+      min-height: 150px;
+      resize: vertical;
+    }
 
     .footer {
       background: var(--navy);
-      color: #d4d8dd;
-      padding: 60px 0 30px;
+      color: #d6dce2;
+      padding: 66px 0 32px;
     }
 
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 1fr 1fr;
-      gap: 26px;
+    .footer-grid { display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 28px; }
+
+    .footer-brand {
+      font-family: var(--serif);
+      font-size: 2rem;
+      margin-bottom: 14px;
+      color: #fff;
+      letter-spacing: .04em;
+      text-transform: uppercase;
     }
 
-    .footer h4 { color: white; margin: 0 0 12px; font-family: var(--serif); font-weight: 400; font-size: 1.5rem; }
-    .footer p, .footer a, .footer span { color: #c6ced7; }
+    .footer h4 {
+      margin: 0 0 12px;
+      color: #fff;
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 400;
+    }
+
+    .footer p, .footer a, .footer span {
+      color: rgba(214,220,226,.78);
+      margin: 0 0 10px;
+      display: block;
+    }
 
     .foot {
+      margin-top: 22px;
+      padding-top: 18px;
       border-top: 1px solid rgba(255,255,255,.08);
-      margin-top: 20px;
-      padding-top: 16px;
-      font-size: 13px;
-      color: #9da8b5;
+      color: rgba(214,220,226,.54);
+      font-size: .86rem;
     }
 
-    @media(max-width:1050px) {
+    @media (max-width: 1080px) {
       .search-bar,
       .grid-2,
       .cards,
       .split-banner,
       .footer-grid,
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
+      .form-grid { grid-template-columns: 1fr; }
 
       .stats { grid-template-columns: repeat(2,1fr); }
     }
 
-    @media(max-width:720px) {
-      .nav a:not(.cta) { display: none; }
+    @media (max-width: 720px) {
+      .container { width: min(var(--max), calc(100% - 24px)); }
       .stats { grid-template-columns: 1fr; }
-      section { padding: 64px 0; }
-      .hero-content { padding-top: 110px; }
+      section { padding: 72px 0; }
+      .hero-content { padding-top: 120px; }
+      .btn { width: 100%; }
     }
   </style>
 </head>
@@ -395,17 +424,12 @@
     <div class="top">
       <div class="container top-inner">
         <div class="logo">Elite Properties Spain</div>
-        <nav class="nav">
-          <a href="#collection">Collection</a>
-          <a href="#investment">Investment</a>
-          <a href="#contact">Contact</a>
-          <a class="cta" href="#contact">Book Consultation</a>
-        </nav>
+        <div class="menu">☰</div>
       </div>
     </div>
 
     <div class="container hero-content">
-      <span class="eyebrow">Luxury real estate · Costa del Sol</span>
+      <span class="eyebrow">Costa del Sol Luxury Real Estate</span>
       <h1>Exceptional Properties for Exceptional Living</h1>
       <p class="sub">Discover the finest luxury villas, penthouses and exclusive residences across Marbella, Mijas and Estepona with a more premium, editorial and trust-driven presentation.</p>
       <div class="actions">
@@ -425,18 +449,18 @@
 
   <section class="intro">
     <div class="container grid-2">
-      <div class="intro-copy">
+      <div>
         <div class="section-head">
-          <h2>A more premium, editorial direction for Elite Properties Spain.</h2>
-          <p class="lead">This version follows the same structural logic as your reference: stronger hero, more curated cards, cleaner stats and a more luxury-led visual rhythm.</p>
+          <h2>A cleaner luxury direction built for trust, desire and higher-value leads.</h2>
+          <p class="lead">This iteration breaks further away from the first mockup and follows your reference more closely: more air, stronger editorial hierarchy and a calmer premium tone.</p>
         </div>
-        <p>The goal is to move away from a generic agency layout and push Elite toward a more refined, high-trust and higher-ticket positioning for international buyers, investors and second-home clients on the Costa del Sol.</p>
+        <p class="body-copy">The objective is to position Elite closer to a luxury advisory brand rather than a generic property portal. That means better visual restraint, stronger photography, more elegant typography and a structure that feels curated instead of template-driven.</p>
       </div>
       <div class="stats">
-        <div class="stat"><strong>Navy + Gold</strong><span>More premium and better aligned with higher-value properties.</span></div>
-        <div class="stat"><strong>Sharper CTA</strong><span>Clearer path to property search and consultation.</span></div>
-        <div class="stat"><strong>Luxury Feel</strong><span>Stronger fit for international buyers over €500k.</span></div>
-        <div class="stat"><strong>Editorial Layout</strong><span>Cleaner hierarchy and less template-like visually.</span></div>
+        <div class="stat"><strong>Navy + Gold</strong><span>Closer to the approved luxury visual system.</span></div>
+        <div class="stat"><strong>Editorial Hero</strong><span>Stronger first impression with premium spacing and hierarchy.</span></div>
+        <div class="stat"><strong>Curated Cards</strong><span>Less generic property-grid feeling, more visual aspiration.</span></div>
+        <div class="stat"><strong>Lead Intent</strong><span>Sharper trust-building for international buyers and investors.</span></div>
       </div>
     </div>
   </section>
@@ -445,11 +469,11 @@
     <div class="container">
       <div class="section-head">
         <h2>Collection highlights</h2>
-        <p class="lead">The cards, imagery and copy blocks now follow the same structure as your visual reference.</p>
+        <p class="lead">A more curated presentation for villas, developments, investment assets and inspection-trip opportunities.</p>
       </div>
       <div class="cards">
         <article class="card" style="background:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat"><div class="card-body"><h3>Exclusive Villas</h3><p>Luxury homes in the most desirable Costa del Sol areas.</p></div></article>
-        <article class="card" style="background:url('https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat"><div class="card-body"><h3>New Developments</h3><p>Modern opportunities with a cleaner sales narrative.</p></div></article>
+        <article class="card" style="background:url('https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat"><div class="card-body"><h3>New Developments</h3><p>Modern opportunities with a cleaner premium sales narrative.</p></div></article>
         <article class="card" style="background:url('https://images.unsplash.com/photo-1501183638710-841dd1904471?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat"><div class="card-body"><h3>Investment Assets</h3><p>Stronger positioning for investors and second-home buyers.</p></div></article>
         <article class="card" style="background:url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat"><div class="card-body"><h3>Inspection Trips</h3><p>Turn interest into qualified buyer meetings on the ground.</p></div></article>
       </div>
@@ -460,11 +484,11 @@
     <div class="container split-banner">
       <div class="banner-box banner-dark">
         <h3>Investor positioning</h3>
-        <p>This structure gives more room to investor trust, stronger premium perception and a higher-end market narrative.</p>
+        <p>This structure creates more space for investor trust, capital preservation messaging and premium-market credibility.</p>
       </div>
       <div class="banner-box banner-light">
-        <h3>Design direction</h3>
-        <p>New palette, better button hierarchy, darker contrast and more polished structure — much closer to the reference you approved.</p>
+        <h3>Design system direction</h3>
+        <p>Darker depth, warmer champagne accents, cleaner spacing and a more elevated visual rhythm that aligns better with your reference.</p>
       </div>
     </div>
   </section>
@@ -473,8 +497,8 @@
     <div class="container">
       <div class="contact-panel">
         <div class="section-head">
-          <h2>Begin Your Journey</h2>
-          <p class="lead">Whether you are searching for your dream home or an investment opportunity, our team is here to guide you every step of the way.</p>
+          <h2>Begin your journey</h2>
+          <p class="lead">Whether you are searching for your dream home or an investment opportunity, Elite can guide you through the Costa del Sol market with a more private and premium experience.</p>
         </div>
         <div class="form-grid">
           <input type="text" placeholder="Full Name" />
@@ -485,7 +509,7 @@
         </div>
         <div class="actions" style="margin-top:18px">
           <a class="btn btn-primary" href="mailto:info@elitepropertiesspain.com">Send Request</a>
-          <a class="btn" style="background:var(--navy);color:#fff" href="https://wa.me/34600000000">WhatsApp</a>
+          <a class="btn btn-dark" href="https://wa.me/34600000000">WhatsApp</a>
         </div>
       </div>
     </div>
@@ -495,23 +519,23 @@
     <div class="container">
       <div class="footer-grid">
         <div>
-          <div class="logo" style="font-size:2rem;letter-spacing:.06em">Elite Properties Spain</div>
+          <div class="footer-brand">Elite Properties Spain</div>
           <p>Luxury real estate with a more refined, trustworthy and editorial presentation for Costa del Sol buyers.</p>
         </div>
         <div>
           <h4>Quick Links</h4>
-          <p><a href="#collection">Collection</a></p>
-          <p><a href="#investment">Investment</a></p>
-          <p><a href="#contact">Contact</a></p>
+          <a href="#collection">Collection</a>
+          <a href="#investment">Investment</a>
+          <a href="#contact">Contact</a>
         </div>
         <div>
           <h4>Contact</h4>
-          <p>Marbella, Costa del Sol, Spain</p>
-          <p>+34 600 000 000</p>
-          <p>info@elitepropertiesspain.com</p>
+          <span>Marbella, Costa del Sol, Spain</span>
+          <span>+34 600 000 000</span>
+          <span>info@elitepropertiesspain.com</span>
         </div>
       </div>
-      <div class="foot">Elite Properties Spain · updated structure aligned to approved reference</div>
+      <div class="foot">Elite Properties Spain · rebranding iteration closer to approved reference</div>
     </div>
   </footer>
 </body>
