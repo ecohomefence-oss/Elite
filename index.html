@@ -945,7 +945,7 @@ function toggleMenu() {
 }
 
 /* ── PROPERTY SEARCH ── */
-const API = 'https://www.elitepropertiesspain.com/elite-api/elite-search-api.php';
+const API = 'https://www.elitepropertiesspain.com/wp-json/elite/v1';
 let _nonce = null;
 let _currentPage = 1;
 let _lastSearch = null;
@@ -953,7 +953,7 @@ let _lastSearch = null;
 // Obtener nonce al cargar la página
 async function fetchNonce() {
   try {
-    const r = await fetch(API + '?action=nonce');
+    const r = await fetch(API + '/nonce');
     const d = await r.json();
     _nonce = d.nonce;
     // Renovar antes de que expire
@@ -1016,7 +1016,7 @@ async function runSearch(params) {
       page:   params.page  || 1,
     });
 
-    const r = await fetch(API, { method: 'POST', body });
+    const r = await fetch(API + '/search', { method: 'POST', body });
     const data = await r.json();
 
     if (!data.ok) throw new Error(data.error || 'Error en la búsqueda');
