@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: Elite Properties Search API
- * Description: Unified search endpoint for Resales Online. Keys never exposed to browser.
- * Version:     1.0.0
+ * Description: Unified search — Resales Online + Infocasa. Keys never exposed to browser.
+ * Version:     1.1.0
  * Author:      Elite Properties Spain
  */
 
@@ -13,6 +13,11 @@ define('ELITE_RESALES_KEY',        'b413901735f823c92f418e9fab51eb461d17a5eb');
 define('ELITE_RESALES_FILTER',     '12461');
 define('ELITE_RESALES_FEATURED',   '12470');
 define('ELITE_RESALES_ENDPOINT',   'https://webapi.resales-online.com/V6/SearchProperties');
+
+// Infocasa SOAP (mismo sistema que /vold/ — IP ya autorizada en el servidor)
+define('ELITE_IC_LICENSE',     '8FA2D6C2-4152-43AE-04-37-74-F0-D1');
+define('ELITE_IC_CLIENT',      'BOMAA');
+define('ELITE_IC_ENDPOINT',    'http://api.infocasa.com/clientservice.asmx');
 define('ELITE_NONCE_SECRET',       'elite_search_2026_nR7kP2mQ9xL4wV1j');
 define('ELITE_NONCE_TTL',          300);
 define('ELITE_RATE_MAX',           20);
@@ -92,15 +97,18 @@ function elite_search_endpoint(WP_REST_Request $request) {
     $page     = max(1, (int)($request->get_param('page')  ?? 1));
     $featured = ($request->get_param('featured') === 'true');
 
-    // 5. Query Resales
-    $filter   = $featured ? ELITE_RESALES_FEATURED : ELITE_RESALES_FILTER;
-    $props    = elite_search_resales($type, $zone, $price, $beds, $page, $filter);
+    // 5. Query Resales + Infocasa en paralelo
+    $filter  = $featured ? ELITE_RESALES_FEATURED : ELITE_RESALES_FILTER;
+    $resales  = elite_search_resales($type, $zone, $price, $beds, $page, $filter);
+    $infocasa = elite_search_infocasa($type, $zone, $price, $beds, $page);
+    $merged   = elite_deduplicate(array_merge($resales, $infocasa));
 
     return new WP_REST_Response([
         'ok'         => true,
-        'total'      => count($props),
+        'total'      => count($merged),
         'page'       => $page,
-        'properties' => $props,
+        'sources'    => ['resales' => count($resales), 'infocasa' => count($infocasa)],
+        'properties' => $merged,
     ], 200);
 }
 
@@ -161,6 +169,92 @@ function elite_map_type(string $type): string {
         'finca'     => '3-7',
         default     => '',
     };
+}
+
+// ─── INFOCASA SOAP ───────────────────────────────────────────────────────────
+function elite_search_infocasa(string $type, string $zone, int $price, int $beds, int $page): array {
+    $filters = '';
+    if ($beds  > 0) $filters .= '<sv ty="bedrooms"><val>'.$beds.'</val><op>&gt;=</op></sv>';
+    if ($price > 0) $filters .= '<sv ty="price"><val>'.$price.'</val><op>&lt;=</op></sv>';
+    if ($zone)      $filters .= '<sv ty="town"><val>'.esc_xml($zone).'</val><op>=</op></sv>';
+    if ($type) {
+        $map = ['villa'=>'Villa','apartment'=>'Apartment','penthouse'=>'Penthouse','townhouse'=>'Townhouse','finca'=>'Country Property'];
+        if (!empty($map[$type])) $filters .= '<sv ty="proptype"><val>'.$map[$type].'</val><op>=</op></sv>';
+    }
+
+    $offset = ($page - 1) * 12;
+    $soap   = '<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Header>
+    <licenceHeader xmlns="urn:schemas-infocasa-com:client-service:2005-11">
+      <lk>'.ELITE_IC_LICENSE.'</lk>
+    </licenceHeader>
+  </soap:Header>
+  <soap:Body>
+    <GetProperties xmlns="urn:schemas-infocasa-com:client-service:2005-11">
+      <ci>'.ELITE_IC_CLIENT.'</ci>
+      <descl>200</descl><rimg>1</rimg>
+      <offset>'.$offset.'</offset><limit>12</limit>
+      '.$filters.'
+    </GetProperties>
+  </soap:Body>
+</soap:Envelope>';
+
+    $response = wp_remote_post(ELITE_IC_ENDPOINT, [
+        'timeout' => 15,
+        'headers' => [
+            'Content-Type' => 'text/xml; charset=utf-8',
+            'SOAPAction'   => '"urn:schemas-infocasa-com:client-service:2005-11/GetProperties"',
+        ],
+        'body' => $soap,
+    ]);
+
+    if (is_wp_error($response)) return [];
+    $raw = wp_remote_retrieve_body($response);
+    if (!$raw) return [];
+
+    libxml_use_internal_errors(true);
+    $doc = simplexml_load_string($raw);
+    if (!$doc) return [];
+
+    $nodes = $doc->xpath('//*[local-name()="p"]');
+    if (empty($nodes)) return [];
+
+    $result = [];
+    foreach ($nodes as $p) {
+        $img = (string)($p->images->img ?? $p->attachments->att ?? '');
+        $result[] = [
+            'source'   => 'infocasa',
+            'ref'      => (string)($p->ref  ?? $p->rn  ?? ''),
+            'title'    => (string)($p->title ?? $p->desc ?? 'Property'),
+            'price'    => (float)($p->price  ?? $p->pr  ?? 0),
+            'beds'     => (int)($p->beds     ?? $p->bd  ?? 0),
+            'baths'    => (int)($p->baths    ?? $p->bt  ?? 0),
+            'sqm'      => (float)($p->built  ?? $p->sqm ?? 0),
+            'location' => (string)($p->town  ?? $p->ar  ?? ''),
+            'type'     => (string)($p->type  ?? $p->pt  ?? ''),
+            'image'    => $img,
+            'url'      => (string)($p->url   ?? ''),
+        ];
+    }
+    return $result;
+}
+
+// ─── DEDUPLICACIÓN ───────────────────────────────────────────────────────────
+function elite_deduplicate(array $props): array {
+    // Resales tiene prioridad cuando hay duplicado (más datos)
+    usort($props, fn($a, $b) => ($a['source'] === 'resales' ? 0 : 1) - ($b['source'] === 'resales' ? 0 : 1));
+    $seen = [];
+    $out  = [];
+    foreach ($props as $p) {
+        $bucket = round($p['price'] / 5000) * 5000;
+        $key    = $bucket.'|'.$p['beds'].'|'.strtolower(substr(trim($p['location']), 0, 4));
+        if (!isset($seen[$key])) {
+            $seen[$key] = true;
+            $out[] = $p;
+        }
+    }
+    return $out;
 }
 
 // ─── NONCE ───────────────────────────────────────────────────────────────────
