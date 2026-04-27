@@ -962,10 +962,11 @@ async function fetchNonce() {
 }
 fetchNonce();
 
-// Cargar propiedades destacadas al inicio (sin filtros)
+// Cargar propiedades destacadas al inicio
 window.addEventListener('DOMContentLoaded', () => {
   runSearch({ type:'', zone:'', price:0, beds:0, page:1, featured:true });
 });
+
 
 function doSearch() {
   _currentPage = 1;

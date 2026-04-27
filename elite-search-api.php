@@ -24,9 +24,10 @@ define('RATE_LIMIT_DIR',      sys_get_temp_dir() . '/elite_rl/');
 define('RESULTS_PER_PAGE',    12);
 
 // Resales Online WebAPI v6
-define('RESALES_API_KEY',     '3b681cf069ac457cbdc02835ac88a9fac1d0cb2c');
-define('RESALES_FILTER_ID',   '');  // ← rellenar desde Resales: Cuenta → API → Filtros
-define('RESALES_ENDPOINT',    'https://webapi.resales-online.com/V6/SearchProperties');
+define('RESALES_API_KEY',        'b413901735f823c92f418e9fab51eb461d17a5eb'); // DEMO JUAALA
+define('RESALES_FILTER_ID',      '12461');  // Default Sale
+define('RESALES_FILTER_FEATURED','12470');  // Default Featured
+define('RESALES_ENDPOINT',       'https://webapi.resales-online.com/V6/SearchProperties');
 
 // Infocasa SOAP
 define('INFOCASA_LICENSE_KEY', '8FA2D6C2-4152-43AE-04-37-74-F0-D1');
@@ -83,14 +84,16 @@ if ($action === 'search' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // 4. Parámetros de búsqueda
-    $type  = sanitize($_POST['type']  ?? '');
-    $zone  = sanitize($_POST['zone']  ?? '');
-    $price = max(0, (int)($_POST['price'] ?? 0));
-    $beds  = max(0, (int)($_POST['beds']  ?? 0));
-    $page  = max(1, (int)($_POST['page']  ?? 1));
+    $type     = sanitize($_POST['type']     ?? '');
+    $zone     = sanitize($_POST['zone']     ?? '');
+    $price    = max(0, (int)($_POST['price']    ?? 0));
+    $beds     = max(0, (int)($_POST['beds']     ?? 0));
+    $page     = max(1, (int)($_POST['page']     ?? 1));
+    $featured = ($_POST['featured'] ?? '') === 'true';
 
-    // 5. Consultar ambas APIs en paralelo usando cURL multi
-    [$resales_raw, $infocasa_raw] = fetch_parallel($type, $zone, $price, $beds, $page);
+    // 5. Consultar Resales (Infocasa se añadirá en siguiente fase)
+    $filter_id = $featured ? RESALES_FILTER_FEATURED : RESALES_FILTER_ID;
+    [$resales_raw, $infocasa_raw] = fetch_parallel($type, $zone, $price, $beds, $page, $filter_id);
 
     $resales  = parse_resales($resales_raw);
     $infocasa = parse_infocasa($infocasa_raw);
@@ -143,13 +146,13 @@ function check_rate_limit(string $ip): bool {
 }
 
 // ─── PETICIONES EN PARALELO ──────────────────────────────────────────────────
-function fetch_parallel(string $type, string $zone, int $price, int $beds, int $page): array {
+function fetch_parallel(string $type, string $zone, int $price, int $beds, int $page, string $filter_id = RESALES_FILTER_ID): array {
     $mh = curl_multi_init();
 
     // — Resales Online —
     $params = [
-        'P_Agency_FilterID' => RESALES_FILTER_ID,
-        'P_API_Key'         => RESALES_API_KEY,
+        'p1'     => $filter_id,
+        'p2'     => RESALES_API_KEY,
         'P_Lang'            => 2,
         'P_Image'           => 1,
         'P_PageSize'        => RESULTS_PER_PAGE,
