@@ -505,169 +505,76 @@ footer { background:var(--black2); color:rgba(255,255,255,0.65); padding:72px 52
   <div class="search-bar reveal reveal-delay-2" style="margin-top:36px">
     <div class="search-field">
       <span class="field-label">Tipo</span>
-      <select class="field-select">
-        <option>Todas las tipologías</option>
-        <option>Villa</option>
-        <option>Apartamento</option>
-        <option>Ático</option>
-        <option>Casa adosada</option>
-        <option>Finca</option>
+      <select id="s-type" class="field-select">
+        <option value="">Todas las tipologías</option>
+        <option value="villa">Villa</option>
+        <option value="apartment">Apartamento</option>
+        <option value="penthouse">Ático</option>
+        <option value="townhouse">Casa adosada</option>
+        <option value="finca">Finca</option>
       </select>
     </div>
     <div class="search-field">
       <span class="field-label">Zona</span>
-      <select class="field-select">
-        <option>Toda la Costa del Sol</option>
-        <option>Marbella</option>
-        <option>Estepona</option>
-        <option>Mijas</option>
-        <option>Benahavís</option>
-        <option>Sotogrande</option>
+      <select id="s-zone" class="field-select">
+        <option value="">Toda la Costa del Sol</option>
+        <option value="Marbella">Marbella</option>
+        <option value="Estepona">Estepona</option>
+        <option value="Mijas">Mijas</option>
+        <option value="Benahavis">Benahavís</option>
+        <option value="Sotogrande">Sotogrande</option>
+        <option value="Puerto Banus">Puerto Banús</option>
+        <option value="Nueva Andalucia">Nueva Andalucía</option>
       </select>
     </div>
     <div class="search-field">
       <span class="field-label">Precio máx.</span>
-      <select class="field-select">
-        <option>Sin límite</option>
-        <option>Hasta €500.000</option>
-        <option>Hasta €1.000.000</option>
-        <option>Hasta €2.500.000</option>
-        <option>Hasta €5.000.000</option>
-        <option>+€5.000.000</option>
+      <select id="s-price" class="field-select">
+        <option value="0">Sin límite</option>
+        <option value="500000">Hasta €500.000</option>
+        <option value="1000000">Hasta €1.000.000</option>
+        <option value="2500000">Hasta €2.500.000</option>
+        <option value="5000000">Hasta €5.000.000</option>
       </select>
     </div>
     <div class="search-field">
       <span class="field-label">Dormitorios</span>
-      <select class="field-select">
-        <option>Cualquiera</option>
-        <option>2+</option>
-        <option>3+</option>
-        <option>4+</option>
-        <option>5+</option>
+      <select id="s-beds" class="field-select">
+        <option value="0">Cualquiera</option>
+        <option value="2">2+</option>
+        <option value="3">3+</option>
+        <option value="4">4+</option>
+        <option value="5">5+</option>
       </select>
     </div>
-    <button class="search-btn">
+    <button class="search-btn" id="search-btn" onclick="doSearch()">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:middle;margin-right:6px"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       Buscar
     </button>
   </div>
+  <div id="search-status" style="text-align:center;margin-top:18px;font-size:13px;color:var(--gray);min-height:20px"></div>
 </section>
 
 <!-- ── PROPERTIES ── -->
 <section id="properties">
   <div class="section-header reveal">
     <div>
-      <p class="section-eyebrow">Selección curada</p>
-      <h2 class="section-title">Propiedades destacadas</h2>
+      <p class="section-eyebrow" id="props-eyebrow">Selección curada</p>
+      <h2 class="section-title" id="props-title">Propiedades destacadas</h2>
     </div>
-    <a href="#" class="view-all">Ver todas →</a>
+    <div style="display:flex;align-items:center;gap:20px">
+      <span id="props-count" style="font-size:12px;color:var(--gray);font-weight:500;letter-spacing:0.1em"></span>
+      <a href="#" class="view-all">Ver todas →</a>
+    </div>
   </div>
-  <div class="props-grid">
+  <div class="props-grid" id="props-grid">
 
-    <div class="prop-card reveal">
-      <div class="prop-img">
-        <div class="prop-img-inner" style="background-image:url('https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4?w=800&q=80')"></div>
-        <span class="prop-badge">Nuevo</span>
-        <span class="prop-price-tag">€4.950.000</span>
-        <span class="prop-loc-tag">Marbella</span>
-      </div>
-      <div class="prop-body">
-        <h3 class="prop-title">Villa Contemporánea con Vistas Panorámicas</h3>
-        <p class="prop-loc">La Zagaleta · Marbella</p>
-        <div class="prop-stats">
-          <span class="prop-stat"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 22V8a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v14"/><path d="M3 12h18"/></svg> 6 dorm.</span>
-          <span class="prop-stat"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/><line x1="2" x2="22" y1="12" y2="12"/></svg> 5 baños</span>
-          <span class="prop-stat">680 m²</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="prop-card reveal reveal-delay-2">
-      <div class="prop-img">
-        <div class="prop-img-inner" style="background-image:url('https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=800&q=80')"></div>
-        <span class="prop-price-tag">€2.850.000</span>
-        <span class="prop-loc-tag">Puerto Banús</span>
-      </div>
-      <div class="prop-body">
-        <h3 class="prop-title">Ático Exclusivo con Terraza y Vistas al Mar</h3>
-        <p class="prop-loc">Puerto Banús · Marbella</p>
-        <div class="prop-stats">
-          <span class="prop-stat"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 22V8a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v14"/><path d="M3 12h18"/></svg> 4 dorm.</span>
-          <span class="prop-stat"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/><line x1="2" x2="22" y1="12" y2="12"/></svg> 3 baños</span>
-          <span class="prop-stat">320 m²</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="prop-card reveal reveal-delay-3">
-      <div class="prop-img">
-        <div class="prop-img-inner" style="background-image:url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80')"></div>
-        <span class="prop-price-tag">€3.200.000</span>
-        <span class="prop-loc-tag">Estepona</span>
-      </div>
-      <div class="prop-body">
-        <h3 class="prop-title">Villa Mediterránea con Jardín Privado</h3>
-        <p class="prop-loc">Valle Romano · Estepona</p>
-        <div class="prop-stats">
-          <span class="prop-stat"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 22V8a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v14"/><path d="M3 12h18"/></svg> 5 dorm.</span>
-          <span class="prop-stat"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/><line x1="2" x2="22" y1="12" y2="12"/></svg> 4 baños</span>
-          <span class="prop-stat">520 m²</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="prop-card reveal">
-      <div class="prop-img">
-        <div class="prop-img-inner" style="background-image:url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80')"></div>
-        <span class="prop-price-tag">€1.450.000</span>
-        <span class="prop-loc-tag">Mijas</span>
-      </div>
-      <div class="prop-body">
-        <h3 class="prop-title">Cortijo Andaluz Reformado con Finca Privada</h3>
-        <p class="prop-loc">La Cala · Mijas Costa</p>
-        <div class="prop-stats">
-          <span class="prop-stat"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 22V8a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v14"/><path d="M3 12h18"/></svg> 4 dorm.</span>
-          <span class="prop-stat"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/><line x1="2" x2="22" y1="12" y2="12"/></svg> 3 baños</span>
-          <span class="prop-stat">380 m²</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="prop-card reveal reveal-delay-2">
-      <div class="prop-img">
-        <div class="prop-img-inner" style="background-image:url('https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80')"></div>
-        <span class="prop-badge">Off-market</span>
-        <span class="prop-price-tag">€6.800.000</span>
-        <span class="prop-loc-tag">Milla de Oro</span>
-      </div>
-      <div class="prop-body">
-        <h3 class="prop-title">Mansión Frente al Mar en la Milla de Oro</h3>
-        <p class="prop-loc">Milla de Oro · Marbella</p>
-        <div class="prop-stats">
-          <span class="prop-stat"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 22V8a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v14"/><path d="M3 12h18"/></svg> 7 dorm.</span>
-          <span class="prop-stat"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/><line x1="2" x2="22" y1="12" y2="12"/></svg> 6 baños</span>
-          <span class="prop-stat">1.200 m²</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="prop-card reveal reveal-delay-3">
-      <div class="prop-img">
-        <div class="prop-img-inner" style="background-image:url('https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80')"></div>
-        <span class="prop-price-tag">€875.000</span>
-        <span class="prop-loc-tag">Estepona</span>
-      </div>
-      <div class="prop-body">
-        <h3 class="prop-title">Apartamento de Lujo en Primera Línea de Playa</h3>
-        <p class="prop-loc">Playa del Cristo · Estepona</p>
-        <div class="prop-stats">
-          <span class="prop-stat"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 22V8a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v14"/><path d="M3 12h18"/></svg> 3 dorm.</span>
-          <span class="prop-stat"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/><line x1="2" x2="22" y1="12" y2="12"/></svg> 2 baños</span>
-          <span class="prop-stat">145 m²</span>
-        </div>
-      </div>
-    </div>
-
+  </div>
+  <!-- paginación -->
+  <div id="props-pagination" style="display:none;text-align:center;margin-top:48px">
+    <button id="btn-prev" onclick="changePage(-1)" style="background:none;border:1px solid var(--gold);color:var(--gold);padding:10px 28px;font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;margin-right:12px">← Anterior</button>
+    <span id="page-indicator" style="font-size:12px;color:var(--gray);font-weight:500"></span>
+    <button id="btn-next" onclick="changePage(1)" style="background:var(--gold);border:1px solid var(--gold);color:var(--black);padding:10px 28px;font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;margin-left:12px">Siguiente →</button>
   </div>
 </section>
 
@@ -1036,6 +943,201 @@ function toggleMenu() {
   const open = nav.style.display === 'flex';
   nav.style.cssText = open ? '' : 'display:flex;flex-direction:column;position:fixed;top:70px;left:0;right:0;background:rgba(13,13,13,0.98);padding:28px 24px 36px;gap:22px;z-index:99;backdrop-filter:blur(10px);border-top:1px solid rgba(184,153,99,0.2)';
 }
+
+/* ── PROPERTY SEARCH ── */
+const API = 'https://www.elitepropertiesspain.com/elite-api/elite-search-api.php';
+let _nonce = null;
+let _currentPage = 1;
+let _lastSearch = null;
+
+// Obtener nonce al cargar la página
+async function fetchNonce() {
+  try {
+    const r = await fetch(API + '?action=nonce');
+    const d = await r.json();
+    _nonce = d.nonce;
+    // Renovar antes de que expire
+    setTimeout(fetchNonce, (d.ttl - 30) * 1000);
+  } catch(e) { /* reintento silencioso */ }
+}
+fetchNonce();
+
+// Cargar propiedades destacadas al inicio (sin filtros)
+window.addEventListener('DOMContentLoaded', () => {
+  runSearch({ type:'', zone:'', price:0, beds:0, page:1, featured:true });
+});
+
+function doSearch() {
+  _currentPage = 1;
+  const params = {
+    type:  document.getElementById('s-type').value,
+    zone:  document.getElementById('s-zone').value,
+    price: parseInt(document.getElementById('s-price').value) || 0,
+    beds:  parseInt(document.getElementById('s-beds').value)  || 0,
+    page:  1,
+  };
+  _lastSearch = params;
+  runSearch(params);
+}
+
+function changePage(delta) {
+  if (!_lastSearch) return;
+  _currentPage = Math.max(1, _currentPage + delta);
+  runSearch({ ..._lastSearch, page: _currentPage });
+  document.getElementById('properties').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+async function runSearch(params) {
+  const btn    = document.getElementById('search-btn');
+  const status = document.getElementById('search-status');
+  const grid   = document.getElementById('props-grid');
+
+  // Estado cargando
+  if (btn) { btn.disabled = true; btn.textContent = 'Buscando…'; }
+  status.textContent = '';
+  grid.innerHTML = skeletonCards(6);
+
+  if (!_nonce) await fetchNonce();
+  if (!_nonce) {
+    grid.innerHTML = errorState('No se pudo conectar con el servidor.');
+    if (btn) { btn.disabled = false; btn.innerHTML = iconSearch() + ' Buscar'; }
+    return;
+  }
+
+  try {
+    const body = new URLSearchParams({
+      action: 'search',
+      nonce:  _nonce,
+      type:   params.type  || '',
+      zone:   params.zone  || '',
+      price:  params.price || 0,
+      beds:   params.beds  || 0,
+      page:   params.page  || 1,
+    });
+
+    const r = await fetch(API, { method: 'POST', body });
+    const data = await r.json();
+
+    if (!data.ok) throw new Error(data.error || 'Error en la búsqueda');
+
+    renderResults(data, params);
+  } catch(e) {
+    grid.innerHTML = errorState('Error al cargar propiedades. Por favor, inténtalo de nuevo.');
+    status.textContent = '';
+  } finally {
+    if (btn) { btn.disabled = false; btn.innerHTML = iconSearch() + ' Buscar'; }
+  }
+}
+
+function renderResults(data, params) {
+  const grid   = document.getElementById('props-grid');
+  const title  = document.getElementById('props-title');
+  const eyebrow= document.getElementById('props-eyebrow');
+  const count  = document.getElementById('props-count');
+  const pag    = document.getElementById('props-pagination');
+  const status = document.getElementById('search-status');
+
+  const props = data.properties || [];
+
+  if (props.length === 0) {
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--gray)">
+      <p style="font-size:16px;margin-bottom:8px">No se encontraron propiedades con estos criterios.</p>
+      <p style="font-size:13px">Prueba a ampliar los filtros de búsqueda.</p>
+    </div>`;
+    pag.style.display = 'none';
+    count.textContent = '';
+    return;
+  }
+
+  const isFiltered = params.type || params.zone || params.price || params.beds;
+  eyebrow.textContent = isFiltered ? 'Resultados de búsqueda' : 'Selección curada';
+  title.textContent   = isFiltered ? 'Propiedades encontradas' : 'Propiedades destacadas';
+  count.textContent   = data.total + ' propiedad' + (data.total !== 1 ? 'es' : '');
+
+  grid.innerHTML = props.map((p, i) => propCard(p, i)).join('');
+
+  // Paginación
+  const hasMore = props.length >= 12;
+  pag.style.display = (_currentPage > 1 || hasMore) ? 'block' : 'none';
+  document.getElementById('btn-prev').style.display = _currentPage > 1 ? 'inline-block' : 'none';
+  document.getElementById('btn-next').style.display = hasMore ? 'inline-block' : 'none';
+  document.getElementById('page-indicator').textContent = 'Página ' + _currentPage;
+
+  // Animar tarjetas
+  requestAnimationFrame(() => {
+    grid.querySelectorAll('.prop-card').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), i * 80);
+    });
+  });
+}
+
+function propCard(p, i) {
+  const price = p.price > 0
+    ? '€' + p.price.toLocaleString('es-ES')
+    : 'Consultar precio';
+  const img = p.image
+    ? `background-image:url('${escHtml(p.image)}')`
+    : `background:var(--cream2)`;
+  const loc  = escHtml(p.location || '');
+  const title= escHtml(p.title    || 'Propiedad');
+  const sqm  = p.sqm > 0 ? `<span class="prop-stat">${Math.round(p.sqm)} m²</span>` : '';
+  const src  = p.source === 'infocasa'
+    ? `<span style="position:absolute;top:12px;left:12px;background:rgba(13,13,13,0.7);color:#fff;font-size:9px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;padding:4px 8px;border-radius:2px">IC</span>`
+    : '';
+  const link = p.url ? `href="${escHtml(p.url)}" target="_blank" rel="noopener"` : 'href="#"';
+
+  return `<div class="prop-card reveal" style="opacity:0;transform:translateY(20px);transition:opacity 0.4s ease ${i*0.08}s,transform 0.4s ease ${i*0.08}s">
+    <a ${link} style="text-decoration:none;color:inherit;display:block">
+      <div class="prop-img">
+        <div class="prop-img-inner" style="${img}"></div>
+        ${src}
+        <span class="prop-price-tag">${price}</span>
+        ${loc ? `<span class="prop-loc-tag">${loc}</span>` : ''}
+      </div>
+      <div class="prop-body">
+        <h3 class="prop-title">${title}</h3>
+        ${loc ? `<p class="prop-loc">${loc}</p>` : ''}
+        <div class="prop-stats">
+          ${p.beds  > 0 ? `<span class="prop-stat">${svgBed()} ${p.beds} dorm.</span>` : ''}
+          ${p.baths > 0 ? `<span class="prop-stat">${svgBath()} ${p.baths} baños</span>` : ''}
+          ${sqm}
+        </div>
+      </div>
+    </a>
+  </div>`;
+}
+
+function skeletonCards(n) {
+  return Array(n).fill(0).map(() => `
+    <div class="prop-card" style="pointer-events:none">
+      <div class="prop-img"><div class="prop-img-inner" style="background:linear-gradient(90deg,#eee 25%,#f5f5f5 50%,#eee 75%);background-size:200% 100%;animation:shimmer 1.2s infinite"></div></div>
+      <div class="prop-body">
+        <div style="height:16px;background:#eee;border-radius:3px;margin-bottom:10px;animation:shimmer 1.2s infinite"></div>
+        <div style="height:12px;background:#eee;border-radius:3px;width:60%;animation:shimmer 1.2s infinite"></div>
+      </div>
+    </div>`).join('');
+}
+
+function errorState(msg) {
+  return `<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--gray)">
+    <p style="font-size:14px">${escHtml(msg)}</p></div>`;
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function iconSearch() {
+  return '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:middle;margin-right:6px"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>';
+}
+function svgBed() {
+  return '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 22V8a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v14"/><path d="M3 12h18"/></svg>';
+}
+function svgBath() {
+  return '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/><line x1="2" x2="22" y1="12" y2="12"/></svg>';
+}
 </script>
+<style>
+@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+</style>
 </body>
 </html>
